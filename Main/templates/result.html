@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container-fluid recommended-section mb-5">
+    <div class="row">
+        <div class="col-12">
+            <h2>Your Recommended Books</h2>
+            <div class="recommendations-container">
+                <div class="recommendation-section">
+                    <h2>Based on Your Survey</h2>
+                    <div id="surveyBasedCarousel" class="carousel slide" data-ride="carousel" data-bs-ride="false">
+                        <div class="carousel-inner" id="surveyBasedRecommendations">
+                            <!-- Content will be dynamically loaded here -->
+                        </div>
+                        <a class="carousel-control-prev" href="#surveyBasedCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#surveyBasedCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div id="genreBasedSections">
+                    <!-- Additional Genre-based Carousels will go here -->
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn uni-btn btn-outline-info">
+         
+                    <a href="{{ url_for('home') }}" style="color: white; text-decoration: none;">Go To Home Page</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+     <!-- Featured Book Modal -->  
+     <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img id="modalBookCover" src="" alt="" class="img-fluid rounded shadow">
+                        </div>
+                        <div class="col-md-7">
+                            <h3 id="modalBookTitle" class="mb-2"></h3>
+                            <p id="modalBookAuthor" class="text-muted mb-4"></p>
+                            <div class="stats-container mb-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="stat-box text-center p-3 rounded">
+                                            <h4 id="modalBookPages"></h4>
+                                            <small class="text-muted">Pages</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-box text-center p-3 rounded">
+                                            <h4 id="modalBookRating"></h4>
+                                            <small class="text-muted">Rating</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-box text-center p-3 rounded">
+                                            <h4 id="modalBookReviews"></h4>
+                                            <small class="text-muted">Awards</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-description mt-4">
+                                <h5>About this book</h5>
+                                <p id="modalBookDescription" class="text-muted"></p>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+      
+
+{% endblock content %}

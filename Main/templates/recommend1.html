@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<body>
+    <!-- Page 1: Genres -->
+    <div class="page" id="page1">
+        <div class="progress">Question 1 of 8</div>
+        <h2>What are your favorite genres?</h2>
+        <div class="hint">Select up to 5 genres</div>
+        <select id="favoriteGenres">
+            <option value="">Select a genre</option>
+            <option value="Romance">Romance</option>
+            <option value="Contemporary Romance">Contemporary Romance</option>
+            <option value="Paranormal Romance">Paranormal Romance</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Mystery Thriller">Mystery Thriller</option>
+            <option value="Psychological Thriller">Psychological Thriller</option>
+            <option value="Horror">Horror</option>
+            <option value="Historical Fiction">Historical Fiction</option>
+            <option value="Literary Fiction">Literary Fiction</option>
+            <option value="Contemporary">Contemporary</option>
+            <option value="Young Adult">Young Adult</option>
+            <option value="Biography">Biography</option>
+            <option value="Philosophy">Philosophy</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Crime">Crime</option>
+            <option value="Drama">Drama</option>
+            <option value="War">War</option>
+            <option value="Action">Action</option>
+            <option value="Academic">Academic</option>
+            </select>
+        
+        <div class="hint">Selected genres:</div>
+        <div id="selectedFavoriteGenres" class="selected-items"></div>
+
+        <div class="footer">
+            <button class="btn uni-btn btn-outline-info" data-action="next">Next</button>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Page 2: Search Books -->
+    <div class="page" id="page2">
+        <div class="progress">Question 2 of 8</div>
+        <h2>Search for books you've enjoyed</h2>
+        <div class="hint">Enter titles, authors, or ISBN numbers</div>
+
+        <input 
+            id="searchInput" 
+            class="search-input" 
+            type="text" 
+            placeholder="Enter title, author, or ISBN"
+            autocomplete="off"
+        >
+
+        <div class="footer">
+            <button data-action="back">Back</button>
+            <button data-action="next">Next</button>
+        </div>
+    </div>
+
+<!-- Page 3: Most Appreciated Characteristics -->
+<div class="page" id="page3">
+    <div class="progress">Question 3 of 8</div>
+    <h2>Which characteristics do you appreciate most?</h2>
+    <div class="hint">Select all that apply</div>
+    <div id="characteristicsList" class="characteristics-grid">
+        <label><input type="checkbox" name="characteristics" value="Realistic/real-world settings/storylines"> Realistic/real-world settings/storylines</label><br>
+        <label><input type="checkbox" name="characteristics" value="Strong world-building/other-worldly"> Strong world-building/other-worldly</label><br>
+        <label><input type="checkbox" name="characteristics" value="Plot twists"> Plot twists</label><br>
+        <label><input type="checkbox" name="characteristics" value="Character-driven"> Character-driven</label><br>
+        <label><input type="checkbox" name="characteristics" value="Plot-heavy"> Plot-heavy</label><br>
+        <label><input type="checkbox" name="characteristics" value="Strong character development"> Strong character development</label><br>
+        <label><input type="checkbox" name="characteristics" value="Loveable characters"> Loveable characters</label><br>
+        <label><input type="checkbox" name="characteristics" value="High-quality writing"> High-quality writing</label><br>
+        <label><input type="checkbox" name="characteristics" value="Learn about human experience/behavior"> Learn about human experience/behavior</label><br>
+        <label><input type="checkbox" name="characteristics" value="Woman author/women-heavy cast"> Woman author/women-heavy cast</label><br>
+        <label><input type="checkbox" name="characteristics" value="Unreliable/morally ambiguous characters"> Unreliable/morally ambiguous characters</label>
+    </div>
+    <div class="footer">
+        <button data-action="back">Back</button>
+        <button data-action="next">Next</button>
+    </div>
+  </div>
+
+<div class="page" id="page4">
+    <div class="progress">Question 4 of 8</div>
+    <h2>Which genres don't interest you?</h2>
+    <div class="hint">Select up to 5 genres</div>
+     <select id="dislikedGenres">
+        <option value="">Select a genre</option>
+        <option value="Romance">Romance</option>
+        <option value="Contemporary Romance">Contemporary Romance</option>
+        <option value="Paranormal Romance">Paranormal Romance</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Mystery Thriller">Mystery Thriller</option>
+        <option value="Psychological Thriller">Psychological Thriller</option>
+        <option value="Horror">Horror</option>
+        <option value="Historical Fiction">Historical Fiction</option>
+        <option value="Literary Fiction">Literary Fiction</option>
+        <option value="Contemporary">Contemporary</option>
+        <option value="Young Adult">Young Adult</option>
+        <option value="Biography">Biography</option>
+        <option value="Philosophy">Philosophy</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Crime">Crime</option>
+        <option value="Drama">Drama</option>
+        <option value="War">War</option>
+        <option value="Action">Action</option>
+        <option value="Academic">Academic</option>
+        </select>
+    <div class="hint">Selected genres:</div>
+    <div id="selectedDislikedGenres" class="selected-items"></div>
+
+    <div class="footer">
+        <button data-action="back">Back</button>
+        <button data-action="next">Next</button>
+    </div>
+</div>
+
+
+        <!-- Page 5: Turn-offs -->
+        <div class="page" id="page5">
+            <div class="progress">Question 5 of 8</div>
+            <h2>What turns you off in a book?</h2>
+            <div class="hint">Select up to 3</div>
+            <div id="turnoffsList">
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="predictable"> Predictable plot
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="flat-characters"> Flat characters
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="poor-writing"> Poor writing
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="dense-writing"> Dense writing
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="shock-ending"> Shock ending
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="confusing-ending"> Confusing ending
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="turnoffs" value="sad-ending"> Sad ending
+                </label>
+            </div>
+            <div class="footer">
+                <button data-action="back">Back</button>
+                <button data-action="next">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 6: Moods -->
+        <div class="page" id="page6">
+            <div class="progress">Question 6 of 8</div>
+            <h2>I am in the mood for books that are:</h2>
+            <div id="moodsList">
+                <label class="option">
+                    <input type="checkbox" name="moods" value="adventurous"> Adventurous
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="dark"> Dark
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="lighthearted"> Lighthearted
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="emotional"> Emotional
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="inspiring"> Inspiring
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="mysterious"> Mysterious
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="reflective"> Reflective
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="tense"> Tense
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="hopeful"> Hopeful
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="sad"> Sad
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="funny"> Funny
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="challenging"> Challenging
+                </label>
+                <label class="option">
+                    <input type="checkbox" name="moods" value="informative"> Informative
+                </label>
+            </div>
+            <div class="footer">
+                <button data-action="back">Back</button>
+                <button data-action="next">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 7: Book Length -->
+        <div class="page" id="page7">
+            <div class="progress">Question 7 of 8</div>
+            <h2>Preferred book length</h2>
+            <label class="option">
+                <input type="radio" name="bookLength" value="100"> More than 100 pages
+            </label>
+            <label class="option">
+                <input type="radio" name="bookLength" value="500"> More than 500 pages
+            </label>
+            <label class="option">
+                <input type="radio" name="bookLength" value="800"> More than 800 pages
+            </label>
+            <div class="footer">
+                <button data-action="back">Back</button>
+                <button data-action="next">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 8: Rating -->
+        <div class="page" id="page8">
+            <div class="progress">Question 8 of 8</div>
+            <h2>Minimum rating you'll consider</h2>
+            <label class="option">
+                <input type="radio" name="minRating" value="5">
+                <span class="rating">★★★★★</span>
+            </label>
+            <label class="option">
+                <input type="radio" name="minRating" value="4">
+                <span class="rating">★★★★</span>
+            </label>
+            <label class="option">
+                <input type="radio" name="minRating" value="3">
+                <span class="rating">★★★</span>
+            </label>
+            <div class="footer">
+                <button data-action="back">Back</button>
+                <button onclick="submitPreferences()">Submit</button>
+            </div>
+        </div>
+     
+        <!--<div class="page" id="results">
+            <h2>Your Recommended Books</h2>
+            <div id="recommendationsList"></div>
+            <div class="footer">
+                <button data-action="back">Back</button>
+                <button onclick="startOver()">Start Over</button>
+            </div>
+        </div>-->
+        <div class="page" id="results">
+            <h2>Your Recommended Books</h2>
+            <div class="recommendations-container">
+                <div class="recommendation-section">
+                    <h3>Based on Your Survey</h3>
+                    <div id="surveyBasedRecommendations" class="recommendations-grid"></div>
+                </div>
+                <div id="genreBasedSections"></div>
+            </div>
+            <div class="footer">
+                <button style="background-color: black; color: white; font-weight: bold; padding: 10px; border: none; cursor: pointer;">
+                    <a href="home" style="color: white; text-decoration: none;">Go To Home Page</a>
+                </button>
+                
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</html>

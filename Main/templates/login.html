@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid categories-section mb-5">
+	<div class="row">
+		<div class="col-12">
+			<div>
+				<form method="POST" action="">
+					{{ form.hidden_tag() }}
+					<fieldset class="form-grp">
+						<h2 class="header border-botton mb-4">Log In</h2>
+		
+						<div class="form-grp">
+							{{ form.email.label(class="form-control-label")}}
+		
+							{% if form.email.errors %}
+								{{ form.email(class="form-control form-control-lg is-invalid")}}
+								<div class="invalid-feedback">
+									{% for error in form.email.errors %}
+										<span>
+											{{ error }}
+										</span>
+									{% endfor %}
+								</div>
+								{% else %}
+									{{ form.email(class="form-control form-control-lg")}}
+							{% endif %}
+						</div>
+		
+						<div class="form-grp">
+							{{ form.password.label(class="form-control-label")}}
+		
+							{% if form.password.errors %}
+								{{ form.password(class="form-control form-control-lg is-invalid")}}
+								<div class="invalid-feedback">
+									{% for error in form.password.errors %}
+										<span>
+											{{ error }}
+										</span>
+									{% endfor %}
+								</div>
+								{% else %}
+									{{ form.password(class="form-control form-control-lg")}}
+							{% endif %}
+						</div>
+						<div class="form-check pt-2">
+							{{ form.remember(class="form-check-input")}}
+							{{ form.remember.label(class="form-check-label")}}
+						</div>
+					</fieldset>
+					<div class="form-grp">
+						{{ form.submit(class="btn uni-btn btn-outline-info")}}
+					</div>
+					<!--<small class="text muted ml-2 pt-5">
+						<a class="pt-5" href="#">Forgot Password?</a>
+					</small>-->
+				</form>
+			</div>
+			<div class=" pt-3">
+				<small class="text-muted">
+					<i>Need an Account?</i> <a class="ml-2" href="{{ url_for('register')}}">Sign Up Now</a>
+				</small>
+			</div>
+		</div>
+	</div>
+</div>
+	
+{% endblock content %}

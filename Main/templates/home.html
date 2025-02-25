@@ -1,0 +1,312 @@
+ {% extends "layout.html" %}
+    {% block content %}
+    <div class="main-content-wrapper mt-5 pt-4">
+         <!-- Categories Section-->
+         <div class="container-fluid categories-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                      <!-- Categories Header -->
+                    <div class="header-container mb-4">
+                        <h2 class="header">Categories</h2>
+                    </div>
+        
+                    <!-- Categories Carousel -->
+                    <div class="categories-container">
+                        <div class="categories-wrapper slider">
+                            {% for category in categories %}
+                            <div class="category-card">
+                                <a href="#" class="text-decoration-none category-link" data-category="{{ category }}">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="category-name">{{ category }}</h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    
+
+            
+            
+        
+            <!-- Category Recommendations Section -->
+            <div id="categoryRecommendations" class="mt-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 id="selectedCategory" class="mb-3"></h3>
+                        <div id="containerCarousel" class="carousel slide" data-ride="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <!-- Content will be dynamically loaded here -->
+                            </div>
+                            <a class="carousel-control-prev" href="#containerCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#containerCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Section -->
+        <div class="container-fluid recommended-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-container mb-4">
+                        <h2 class="header">Featured Books</h2>
+                        <a href="#" class="see-all">See All</a>
+                    </div>
+
+                    <!-- Multi-book Carousel -->
+                    <div id="bookCarousel" class="carousel slide" data-ride="carousel" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            {% for books in content|batch(4) %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <div class="row book-row">
+                                    {% for book in books %}
+                                    <div class="col-md-3">
+                                        <div class="book-card">
+                                            <img src="{{ book.coverImage }}" 
+                                                 class="book-cover" 
+                                                 alt="{{ book.title }}"
+                                                 data-toggle="modal"
+                                                 data-target="#bookModal"
+                                                 data-book-title="{{ book.title }}"
+                                                 data-book-author="{{ book.author }}"
+                                                 data-book-pages="{{ book.pages }}"
+                                                 data-book-rating="{{ book.rating }}"
+                                                 data-book-awards="{{ book.awards|default(0) }}"
+                                                 data-book-cover="{{ book.coverImage }}"
+                                                 data-book-description="{{book.description}}"
+                                                 style="cursor: pointer;">
+                                            <div class="book-info">
+                                                <h6 class="book-title">{{ book.title }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#bookCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#bookCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>          
+    </div>
+
+
+        <!-- Featured Book Modal -->  
+        <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img id="modalBookCover" src="" alt="" class="img-fluid rounded shadow">
+                            </div>
+                            <div class="col-md-7">
+                                <h3 id="modalBookTitle" class="mb-2"></h3>
+                                <p id="modalBookAuthor" class="text-muted mb-4"></p>
+                                <div class="stats-container mb-4">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="stat-box text-center p-3 rounded">
+                                                <h4 id="modalBookPages"></h4>
+                                                <small class="text-muted">Pages</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="stat-box text-center p-3 rounded">
+                                                <h4 id="modalBookRating"></h4>
+                                                <small class="text-muted">Rating</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="stat-box text-center p-3 rounded">
+                                                <h4 id="modalBookReviews"></h4>
+                                                <small class="text-muted">Awards</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="book-description mt-4">
+                                    <h5>About this book</h5>
+                                    <p id="modalBookDescription" class="text-muted"></p>
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
+    <script>
+        $('#bookModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+
+            var title = button.data('book-title');
+            var author = button.data('book-author');
+            var pages = button.data('book-pages');
+            var rating = button.data('book-rating');
+            var awards = button.data('book-awards');
+            var cover = button.data('book-cover');
+            var description = button.data('book-description');
+
+            modal.find('#modalBookTitle').text(title);
+            modal.find('#modalBookAuthor').text(author);
+            modal.find('#modalBookPages').text(pages);
+            modal.find('#modalBookRating').text(rating);
+            modal.find('#modalBookReviews').text(awards);
+            modal.find('#modalBookDescription').text(description);
+            modal.find('#modalBookCover').attr('src', cover);
+        });  
+        
+    </script>
+
+   
+<script>
+    
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.categories-container');
+    const wrapper = document.querySelector('.categories-wrapper');
+    const categoryLinks = document.querySelectorAll('.category-link');
+    
+    // Variables for drag scrolling
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Mouse events for drag scrolling
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.style.cursor = 'grabbing';
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        container.scrollLeft = scrollLeft - walk;
+    });
+
+    // Book loading function remains the same
+    function loadCategoryBooks(category) {
+        fetch(`/get_category_books/${category}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.books && data.books.length > 0) {
+                    updateCategoryCarousel(data.books, category);
+                    document.getElementById('categoryRecommendations').style.display = 'block';
+                    document.getElementById('selectedCategory').textContent = category + ' Books';
+                }
+            })
+            .catch(error => console.error('Error loading category books:', error));
+    }
+
+    // Update Category Carousel function remains the same
+    function updateCategoryCarousel(books, category) {
+        const carouselInner = document.querySelector('#containerCarousel .carousel-inner');
+        carouselInner.innerHTML = '';
+        
+        for (let i = 0; i < books.length; i += 4) {
+            const slideBooks = books.slice(i, i + 4);
+            const slide = document.createElement('div');
+            slide.className = `carousel-item ${i === 0 ? 'active' : ''}`;
+            
+            const row = document.createElement('div');
+            row.className = 'row book-row';
+            
+            slideBooks.forEach(book => {
+                const bookHTML = `
+                    <div class="col-md-3">
+                        <div class="book-card">
+                            <img src="${book.coverImage}" 
+                                 class="book-cover" 
+                                 alt="${book.title}"
+                                 data-toggle="modal"
+                                 data-target="#bookModal"
+                                 data-book-title="${book.title}"
+                                 data-book-author="${book.author}"
+                                 data-book-pages="${book.pages}"
+                                 data-book-rating="${book.rating}"
+                                 data-book-awards="${book.awards}"
+                                 data-book-cover="${book.coverImage}"
+                                 data-book-description="${book.description}"
+                                 style="cursor: pointer;">
+                            <div class="book-info">
+                                <h6 class="book-title">${book.title}</h6>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                row.insertAdjacentHTML('beforeend', bookHTML);
+            });
+            
+            slide.appendChild(row);
+            carouselInner.appendChild(slide);
+        }
+        
+        $('#containerCarousel').carousel('dispose');
+        $('#containerCarousel').carousel({
+            interval: 5000
+        });
+    }
+
+    // Category link click handlers remain the same
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            loadCategoryBooks(category);
+        });
+    });
+});
+</script>
+
+{% endblock content %}
+

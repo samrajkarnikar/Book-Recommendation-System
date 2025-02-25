@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid categories-section mb-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="container mt-5 pt-4">
+    
+                {% if results %}
+                <div class="row">
+                    {% for book in results %}
+                    <div class="col-md-3 mb-4">
+                        <div class="book-card">
+                            <img src="{{ book.coverImage }}" 
+                                 class="book-cover" 
+                                 alt="{{ book.title }}"
+                                 data-toggle="modal"
+                                 data-target="#bookModal"
+                                 data-book-title="{{ book.title }}"
+                                 data-book-author="{{ book.author }}"
+                                 data-book-pages="{{ book.pages }}"
+                                 data-book-rating="{{ book.rating }}"
+                                 data-book-awards="{{ book.awards }}"
+                                 data-book-cover="{{ book.coverImage }}"
+                                 data-book-description="{{ book.description }}"
+                                 style="cursor: pointer;">
+                            <div class="book-info">
+                                <h6 class="book-title">{{ book.title }}</h6>
+                                <p class="book-author">{{ book.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    No books found matching your search. Try different keywords or browse our categories below.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+      <!-- Featured Book Modal -->  
+      <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img id="modalBookCover" src="" alt="" class="img-fluid rounded shadow">
+                        </div>
+                        <div class="col-md-7">
+                            <h3 id="modalBookTitle" class="mb-2"></h3>
+                            <p id="modalBookAuthor" class="text-muted mb-4"></p>
+                            <div class="stats-container mb-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="stat-box text-center p-3 rounded">
+                                            <h4 id="modalBookPages"></h4>
+                                            <small class="text-muted">Pages</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-box text-center p-3 rounded">
+                                            <h4 id="modalBookRating"></h4>
+                                            <small class="text-muted">Rating</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-box text-center p-3 rounded">
+                                            <h4 id="modalBookReviews"></h4>
+                                            <small class="text-muted">Awards</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-description mt-4">
+                                <h5>About this book</h5>
+                                <p id="modalBookDescription" class="text-muted"></p>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#bookModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+
+            var title = button.data('book-title');
+            var author = button.data('book-author');
+            var pages = button.data('book-pages');
+            var rating = button.data('book-rating');
+            var awards = button.data('book-awards');
+            var cover = button.data('book-cover');
+            var description = button.data('book-description');
+
+            modal.find('#modalBookTitle').text(title);
+            modal.find('#modalBookAuthor').text(author);
+            modal.find('#modalBookPages').text(pages);
+            modal.find('#modalBookRating').text(rating);
+            modal.find('#modalBookReviews').text(awards);
+            modal.find('#modalBookDescription').text(description);
+            modal.find('#modalBookCover').attr('src', cover);
+        });  
+        
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsDiv = document.getElementById('searchSuggestions');
+        let debounceTimeout;
+    
+        // Handle input changes
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimeout);
+            const query = this.value.trim();
+            
+            if (query.length < 2) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+    
+            debounceTimeout = setTimeout(() => {
+                fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.results && data.results.length > 0) {
+                            displaySuggestions(data.results);
+                        } else {
+                            suggestionsDiv.style.display = 'none';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching suggestions:', error));
+            }, 300);
+        });
+    
+        // Display suggestions
+        function displaySuggestions(results) {
+            suggestionsDiv.innerHTML = '';
+            results.slice(0, 5).forEach(book => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item d-flex align-items-center';
+                div.innerHTML = `
+                    <img src="${book.coverImage}" alt="${book.title}">
+                    <div>
+                        <div class="suggestion-title">${book.title}</div>
+                        <div class="suggestion-author">${book.author}</div>
+                    </div>
+                `;
+                div.addEventListener('click', () => {
+                    window.location.href = `/search?q=${encodeURIComponent(book.title)}`;
+                });
+                suggestionsDiv.appendChild(div);
+            });
+            suggestionsDiv.style.display = 'block';
+        }
+    
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+                suggestionsDiv.style.display = 'none';
+            }
+        });
+    });
+    </script>
+
+    
+
+{% endblock content %}

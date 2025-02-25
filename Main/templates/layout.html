@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    {% if title %}
+        <title>Book Recommendation System</title>
+    {% else %}
+        <title>Book Recommendation System - Online Books Hub</title>
+    {% endif %}
+</head>
+
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Book Recommendation System</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            {% if current_user.is_authenticated %}
+                {% if current_user.is_admin %}
+                    <!-- Admin Navigation -->
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                        <a class="nav-item nav-link" href="{{ url_for('uploadbook') }}">Upload Book</a>
+                        <a class="nav-item nav-link" href="{{ url_for('deletebook') }}">Delete Book</a>
+
+                    </div>
+                    <form class="form-inline my-2 my-lg-0 mr-3" action="{{ url_for('search') }}" method="get">
+                        <div class="input-group">
+                            <input class="form-control" type="search" name="q" placeholder="Search books..." 
+                                   aria-label="Search" id="searchInput" autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </form>
+                    <!-- Admin Right Side -->
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="{{ url_for('account') }}">Admin Account</a>
+                        <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                {% else %}
+                    <!-- Client Navigation -->
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                        <a class="nav-item nav-link" href="{{ url_for('recommend') }}">Recommend</a>
+                    </div>
+                    <form class="form-inline my-2 my-lg-0 mr-3" action="{{ url_for('search') }}" method="get">
+                        <div class="input-group">
+                            <input class="form-control" type="search" name="q" placeholder="Search books..." 
+                                   aria-label="Search" id="searchInput" autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </form>
+                    <!-- Client Right Side -->
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
+                        <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <!-- Unauthenticated Navigation -->
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                </div>
+                <form class="form-inline my-2 my-lg-0 mr-3" action="{{ url_for('search') }}" method="get">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="q" placeholder="Search books..." 
+                               aria-label="Search" id="searchInput" autocomplete="off">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </form>
+                <div class="navbar-nav">      
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                </div>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+      </div>
+    </main>
+
+  </body>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</html>

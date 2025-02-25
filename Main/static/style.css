@@ -1,0 +1,304 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D'); /* Replace with the actual image URL */
+     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures the body covers the entire viewport height */
+    flex-direction: column;
+    color: #333; /* Ensure text is readable on the background */
+}
+
+.page {
+    display: none;
+    background: #f5efe2;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    max-width: 1000px; /* Optional: to ensure the content doesn't stretch too wide */
+    max-height: 1000vh; /* Optional: set a maximum height for the content */
+    overflow-y: auto; /* Enables vertical scrolling if the content exceeds the height */
+}
+
+.page:first-child {
+    display: block;
+}
+
+
+
+/* Progress Bar */
+.progress {
+    
+}
+
+/* Headers */
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Hints */
+.hint {
+    color: #666;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+/* Input Elements */
+select, .search-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Checkboxes and Radio Buttons */
+.option {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #f9f9f9;
+}
+
+.characteristics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* Style individual checkbox containers */
+.characteristics-grid label {
+    display: block;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.characteristics-grid label:hover {
+    background-color: #f9f9f9;
+}
+
+/* Style for the checkbox and text alignment */
+.characteristics-grid input[type="checkbox"] {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Optional: Add some spacing between sections */
+.question-section {
+    margin-bottom: 30px;
+}
+
+/* Selected Items Display */
+.selected-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.selected-item {
+    background: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remove-item {
+    cursor: pointer;
+    color: #666;
+}
+
+/* Footer Navigation */
+.footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #312946;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button[data-action="back"] {
+    background-color: #6c757d;
+}
+
+/* Rating Stars */
+.rating {
+    color: #ffd700;
+    font-size: 1.5em;
+}
+
+/* Results Page */
+#recommendationsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+/* recommendations.css */
+
+.recommendations-container {
+    margin: 20px 0;
+    padding: 20px;
+    height: max-content;
+    
+}
+
+.recommendation-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-section h3 {
+    margin-bottom: 20px;
+    color: #2d3748;
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #edf2f7;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    padding: 15px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* .book-cover {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+} */
+
+#modalBookCover {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.book-details {
+    padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.book-info {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 12px;
+}
+
+.book-info p {
+    margin: 4px 0;
+}
+
+.author {
+    font-style: italic;
+}
+
+.rating {
+    color: #ecc94b;
+    font-weight: 600;
+}
+
+.genres {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.awards {
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #edf2f7;
+    font-size: 0.8rem;
+    color: #805ad5;
+}
+
+.empty-message {
+    text-align: center;
+    color: #718096;
+    padding: 40px;
+    font-style: italic;
+    background: #f7fafc;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+@media (max-width: 640px) {
+    .recommendations-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+    }
+    
+    .book-cover {
+        height: 200px;
+    }
+    
+    .book-details {
+        padding: 12px;
+    }
+}

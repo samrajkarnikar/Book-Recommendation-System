@@ -1,0 +1,223 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    
+
+    <script> 
+        document.addEventListener('DOMContentLoaded', function() 
+        {
+            const likedGenresSelect = document.getElementById('likedGenres'); 
+            const selectedGenresList = document.getElementById('selectedGenres'); 
+            
+            likedGenresSelect.addEventListener('change', function() { 
+                const selectedOptions = [...likedGenresSelect.selectedOptions]; 
+                if (selectedOptions.length > 5) 
+                { alert('You can only select up to 5 genres.'); 
+                selectedOptions.forEach(option => option.selected = false); 
+                return; 
+            } // Display selected genres 
+            selectedGenresList.innerHTML = ''; 
+            selectedOptions.forEach(option => 
+            { const li = document.createElement('li'); 
+            li.textContent = option.text; 
+            selectedGenresList.appendChild(li);
+        });
+    }); 
+});
+            
+    </script>
+    <div class="content-section">
+        
+        <form method="POST" action="{{ url_for('uploadbook') }}">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Upload Book</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.bookId.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.bookId(class="form-control") }}
+                    {% for error in form.bookId.errors %}
+                        <div class="text-danger">{{ 'Book ID is required' }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.title.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.title(class="form-control") }}
+                    {% for error in form.title.errors %}
+                        <div class="text-danger">{{ 'Title is required' }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.series.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.series(class="form-control") }}
+                    {% for error in form.series.errors %}
+                        <div class="text-danger">{{ 'Series is required' }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.author.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.author(class="form-control") }}
+                    {% for error in form.author.errors %}
+                        <div class="text-danger">{{ 'Author name is required'  }}</div> <!-- Display the first error message -->
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.rating.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.rating(class="form-control") }}
+                    {% for error in form.rating.errors %}
+                        <div class="text-danger">{{ 'Rating is required'  }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.language.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.language(class="form-control") }}
+                    {% for error in form.language.errors %}
+                        <div class="text-danger">{{ 'Language is required'  }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control", rows=4) }}
+                {% for error in form.description.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.isbn.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.isbn(class="form-control") }}
+                    {% for error in form.isbn.errors %}
+                        <div class="text-danger">{{ 'ISBN must be between 10 and 13 characters' }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.genres.label(class="form-label") }}<span class="text-danger">*</span>
+                    <select id="likedGenres" name="genres" class="form-control">
+                        <option value="">Select a genre</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Contemporary Romance">Contemporary Romance</option>
+                        <option value="Paranormal Romance">Paranormal Romance</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Science Fiction">Science Fiction</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Mystery Thriller">Mystery Thriller</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Historical Fiction">Historical Fiction</option>
+                        <option value="Literary Fiction">Literary Fiction</option>
+                        <option value="Contemporary">Contemporary</option>
+                        <option value="Young Adult">Young Adult</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Dystopian">Dystopian</option>
+                        <option value="War">War</option>
+                        <option value="Action">Action</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Experimental">Experimental</option>
+                        <option value="Postmodern">Postmodern</option>
+                    </select>
+                    {% for error in form.genres.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.characters.label(class="form-label") }}
+                    {{ form.characters(class="form-control") }}
+                    {% for error in form.characters.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.bookFormat.label(class="form-label") }}
+                    {{ form.bookFormat(class="form-control") }}
+                    {% for error in form.bookFormat.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.edition.label(class="form-label") }}
+                    {{ form.edition(class="form-control") }}
+                    {% for error in form.edition.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.pages.label(class="form-label") }}<span class="text-danger">*</span>
+                    {{ form.pages(class="form-control") }}
+                    {% for error in form.pages.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.publisher.label(class="form-label") }}
+                    {{ form.publisher(class="form-control") }}
+                    {% for error in form.publisher.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.publishDate.label(class="form-label") }}
+                    {{ form.publishDate(class="form-control") }}
+                    {% for error in form.publishDate.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.firstPublishDate.label(class="form-label") }}
+                    {{ form.firstPublishDate(class="form-control") }}
+                    {% for error in form.firstPublishDate.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.awards.label(class="form-label") }}
+                    {{ form.awards(class="form-control") }}
+                    {% for error in form.awards.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.numRatings.label(class="form-label") }}
+                    {{ form.numRatings(class="form-control") }}
+                    {% for error in form.numRatings.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.ratingsByStars.label(class="form-label") }}
+                    {{ form.ratingsByStars(class="form-control") }}
+                    {% for error in form.ratingsByStars.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="uni-btn btn-outline-danger">Submit</button>
+                
+            </div>
+        </form>
+    </fieldset>
+    </div>
+{% endblock content %}
+
