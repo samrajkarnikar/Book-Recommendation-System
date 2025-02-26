@@ -1,20 +1,20 @@
 # Book Recommendation System
 
 ## Content Based Filtering Using K-Means Clustering Algorithm
-====================================
+
 
 ## Features
 
-**Complete ETL Pipeline:** Engineered using pandas for data cleaning, transformation, and preprocessing of book metadata
-**Advanced Text Analysis:** Implemented with scikit-learn's TF-IDF vectorizer to capture semantic similarities between books
-**Intelligent Clustering:** Applied K-means clustering to categorize books into distinct reader preference groups
-**Multi-criteria Filtering System:** Designed to account for user-specific preferences including genre, writing style, content preferences, and quality thresholds
-**Weighted Scoring Algorithms:** Created to balance multiple factors like reader ratings, literary awards, and similarity measures
-**Flexible Search Functionality:** Developed with intelligent relaxation of constraints to always provide relevant recommendations
-**Robust Error Handling:** Built with comprehensive error handling and data validation to manage missing or malformed data
+- **Complete ETL Pipeline:** Engineered using pandas for data cleaning, transformation, and preprocessing of book metadata
+- **Advanced Text Analysis:** Implemented with scikit-learn's TF-IDF vectorizer to capture semantic similarities between books
+- **Intelligent Clustering:** Applied K-means clustering to categorize books into distinct reader preference groups
+- **Multi-criteria Filtering System:** Designed to account for user-specific preferences including genre, writing style, content preferences, and quality thresholds
+- **Weighted Scoring Algorithms:** Created to balance multiple factors like reader ratings, literary awards, and similarity measures
+- **Flexible Search Functionality:** Developed with intelligent relaxation of constraints to always provide relevant recommendations
+- **Robust Error Handling:** Built with comprehensive error handling and data validation to manage missing or malformed data
 
 #
-============================================
+
 ### (a) Create a Virtual Environment in Anaconda
 1. Open **Anaconda Prompt**.
 2. Create a new virtual environment:
@@ -32,7 +32,7 @@
      source activate myenv
      ```
 #
-======================================
+
 ### (b) Run the Virtual Environment in Visual Studio Code
 1. Open **VS Code**.
 2. Install the **Python Extension** if not installed.
@@ -45,7 +45,7 @@
    - **Windows:** `conda activate myenv`
    - **Mac/Linux:** `source activate myenv`
 #
-====================================
+
 
 ### (c) Create a Database in SQLite Using `create_db.py`
 1. Open your project folder in VS Code.
@@ -58,7 +58,7 @@
 ** Database file is stored in instance **
 
 #
-====================================
+
 
 ### (d) Extensions to See SQLite Database and Jupyter Notebook
 1. **For SQLite Database:**
@@ -74,7 +74,7 @@
    - Create a new `.ipynb` file and open it in VS Code.
 
 #
-====================================
+
 
 ### (e) Run `requirements.txt` and `run.py`
 1. Install dependencies from `requirements.txt`:
@@ -87,7 +87,7 @@
    ```
 
 #
-====================================
+
 
 ### (f) Definitions of Common Project Files
 1. **`templates/`** - Contains HTML files for the frontend (Jinja templates in Flask).
@@ -97,7 +97,6 @@
 5. **`recommend.py`** - Implements the book recommendation logic based on user preferences.
 
 #
-====================================
 
 ### Output
 
