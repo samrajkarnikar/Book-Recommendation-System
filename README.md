@@ -1,15 +1,16 @@
 # Book Recommendation System
  Content Based Filtering Using K-Means Clustering Algorithm
 ====================================
- Book recommendation system using Python that applies machine learning techniques to provide personalized suggestions. 
 
-1.Engineered a complete ETL pipeline using pandas for data cleaning, transformation, and preprocessing of book metadata
-2.Implemented advanced text analysis with scikit-learn's TF-IDF vectorizer to capture semantic similarities between books
-3.Applied K-means clustering to categorize books into distinct reader preference groups
-4.Designed and built a multi-criteria filtering system accounting for user-specific preferences including genre, writing style, content preferences, and quality thresholds
-5.Created weighted scoring algorithms that balance multiple factors like reader ratings, literary awards, and similarity measures
-6.Developed search functionality with intelligent relaxation of constraints to always provide relevant recommendations
-7.Built a system robust against missing or malformed data through comprehensive error handling and data validation
+# Features
+
+Complete ETL Pipeline: Engineered using pandas for data cleaning, transformation, and preprocessing of book metadata
+Advanced Text Analysis: Implemented with scikit-learn's TF-IDF vectorizer to capture semantic similarities between books
+Intelligent Clustering: Applied K-means clustering to categorize books into distinct reader preference groups
+Multi-criteria Filtering System: Designed to account for user-specific preferences including genre, writing style, content preferences, and quality thresholds
+Weighted Scoring Algorithms: Created to balance multiple factors like reader ratings, literary awards, and similarity measures
+Flexible Search Functionality: Developed with intelligent relaxation of constraints to always provide relevant recommendations
+Robust Error Handling: Built with comprehensive error handling and data validation to manage missing or malformed data
 
 #
 ============================================
