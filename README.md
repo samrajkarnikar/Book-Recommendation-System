@@ -18,9 +18,8 @@
      ```
      source activate myenv
      ```
-
-====================================
-
+#
+======================================
 ### (b) Run the Virtual Environment in Visual Studio Code
 1. Open **VS Code**.
 2. Install the **Python Extension** if not installed.
@@ -32,7 +31,7 @@
 6. Open a new terminal in VS Code and activate the virtual environment:
    - **Windows:** `conda activate myenv`
    - **Mac/Linux:** `source activate myenv`
-
+#
 ====================================
 
 ### (c) Create a Database in SQLite Using `create_db.py`
@@ -45,6 +44,7 @@
    This creates `books.db` in your project directory.
 ** Database file is stored in instance **
 
+#
 ====================================
 
 ### (d) Extensions to See SQLite Database and Jupyter Notebook
@@ -60,6 +60,7 @@
      ```
    - Create a new `.ipynb` file and open it in VS Code.
 
+#
 ====================================
 
 ### (e) Run `requirements.txt` and `run.py`
@@ -72,6 +73,7 @@
    python run.py
    ```
 
+#
 ====================================
 
 ### (f) Definitions of Common Project Files
@@ -81,6 +83,7 @@
 4. **`form.py`** - Defines classes for user input forms using Flask-WTF.
 5. **`recommend.py`** - Implements the book recommendation logic based on user preferences.
 
+#
 ====================================
 
 ### Output
