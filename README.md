@@ -1,8 +1,5 @@
 # Book Recommendation System
  Content Based Filtering Using K-Means Clustering Algorithm
-
-README - Project Setup Guide
-
 ====================================
 
 ### (a) Create a Virtual Environment in Anaconda
